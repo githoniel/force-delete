@@ -23,13 +23,15 @@ function runCommandSync(cmd, args, options) {
         )
     )
 }
-
-module.exports = runCommandSync
-
+/**
+ * @param {string} deletePath the path to a file, a folder or a leading part of the path. E.g. K:, C:\Program Files, C:\Docume. /unlock or -u - unlocks the file_or_folder_path. It closes all handles to the files\folder that starts from file_or_folder_path and unloads .dlls which are residing in the files\folder that starts from file_or_folder_path.
+ * @param {object} options
+ * @param {object} options.kill terminates all the apps which are launched from path
+ */
 module.exports = function forceDelete(deletePath, {
     kill,
 }) {
-    const args = ['-d', '-sm']
+    const args = ['-d', '-dp']
     if (kill) {
         args.push('-k')
     }
