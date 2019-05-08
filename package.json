@@ -1,5 +1,5 @@
 {
-  "name": "force-delete",
+  "name": "fs-force-delete",
   "version": "1.0.0",
   "description": "force delete files or directories blocked by other process",
   "main": "index.js",

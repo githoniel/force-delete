@@ -27,17 +27,19 @@ function runCommandSync(cmd, args, options) {
  * @param {string} deletePath the path to a file, a folder or a leading part of the path. E.g. K:, C:\Program Files, C:\Docume. /unlock or -u - unlocks the file_or_folder_path. It closes all handles to the files\folder that starts from file_or_folder_path and unloads .dlls which are residing in the files\folder that starts from file_or_folder_path.
  * @param {object} options
  * @param {object} options.kill terminates all the apps which are launched from path
+ * @param {object} options.staticPath path to this package's `/static`, use this when using webpack in electron
  */
 module.exports = function forceDelete(deletePath, {
     kill,
-}) {
+    staticPath
+} = {}) {
     const args = ['-d', '-dp']
     if (kill) {
         args.push('-k')
     }
     args.push(`"${deletePath}"`)
     const result = runCommandSync(
-        path.join(__dirname, '../static/LockHunter.exe'),
+        staticPath || path.join(__dirname, '../static/LockHunter.exe'),
         args
     )
     switch (result.status) {
